@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" id="app">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th class="col">id</th>
+            <th class="col">raisonSociale</th>
+            <th class="col">projectRefrence</th>
+            <th class="col">categorieProjet</th>
+            <th class="col">infoProject</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr  v-for="(result, index) in results">
+
+                <td class="col"> {{ result.id }}</td>
+                <td class="col"> {{ result.raisonSociale }}</td>
+                <td class="col"> {{ result.projectRefrence }}</td>
+                <td class="col"> {{ result.categorieProjet }}</td>
+                <td class="col"> {{ result.infoProject }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    const url = "http://localhost:8888/projectProposition/";
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            results: []
+        },
+        mounted() {
+            axios.get(url).then(response => {
+                this.results = response.data
+            })
+        }
+    });
+</script>
+</body>
+</html>
